@@ -1,15 +1,43 @@
 package com.example.androidstock;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.Window;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		WebView webview = new WebView(this);
+
+		getWindow().requestFeature(Window.FEATURE_PROGRESS);
+		
+		setContentView(webview);
+
+		webview.getSettings().setJavaScriptEnabled(true);
+		webview.getSettings().setBuiltInZoomControls(true); 
+		
+		MyJavaScriptInterface jInterface = new MyJavaScriptInterface(this);
+		webview.addJavascriptInterface(jInterface, "HtmlViewer");
+		
+		webview.setWebViewClient(new WebViewClient() {
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				Log.d("finish","hello");
+			   //Load HTML
+			   view.loadUrl("javascript:window.HtmlViewer.showHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+			}
+		});
+		webview.loadUrl("http://developer.android.com/");
+
 	}
 
 	@Override
@@ -19,4 +47,19 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+}
+
+class MyJavaScriptInterface {
+	private Context ctx;
+	public String html;
+
+	MyJavaScriptInterface(Context ctx) {
+	    this.ctx = ctx;
+	}
+
+	@JavascriptInterface
+	public void showHTML(String _html) {
+	    html = _html;
+	    System.out.println(html);
+	}
 }
