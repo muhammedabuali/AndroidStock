@@ -12,12 +12,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class MainActivity extends Activity {
-
+	boolean flag = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		WebView webview = new WebView(this);
-		webview.setVisibility(View.GONE);
+		//webview.setVisibility(View.GONE);		
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		
 		setContentView(webview);
@@ -29,15 +30,22 @@ public class MainActivity extends Activity {
 		webview.addJavascriptInterface(jInterface, "HtmlViewer");
 		
 		webview.setWebViewClient(new WebViewClient() {
-
+			
 			@Override
 			public void onPageFinished(WebView view, String url) {
-				Log.d("finish","hello");
+				Log.d("hello",url);
 			   //Load HTML
-			   view.loadUrl("javascript:window.HtmlViewer.showHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+				view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
+				if(!flag){
+					view.loadUrl("javascript:__doPostBack('ctl00$C$S$lkMarket','')");
+					view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
+				}
+			   flag = true;
+			   
 			}
+			
 		});
-		webview.loadUrl("http://developer.android.com/");
+		webview.loadUrl("http://www.egx.com.eg/Arabic/prices.aspx");
 
 	}
 
