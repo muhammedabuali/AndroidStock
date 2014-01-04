@@ -1,11 +1,13 @@
 package com.example.androidstock;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.view.Window;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -35,9 +37,9 @@ public class MainActivity extends Activity {
 			public void onPageFinished(WebView view, String url) {
 				Log.d("hello",url);
 			   //Load HTML
-				view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
 				if(!flag){
 					view.loadUrl("javascript:__doPostBack('ctl00$C$S$lkMarket','')");
+				}else{
 					view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
 				}
 			   flag = true;
@@ -69,6 +71,8 @@ class MyJavaScriptInterface {
 	@JavascriptInterface
 	public void showHTML(String _html) {
 	    html = _html;
-	    System.out.println(html);
+	    Document doc = Jsoup.parse(html);
+	    Log.d("hello","ok");
+	    Log.d("hello",doc.getElementsByTag("tr").size()+"");
 	}
 }
