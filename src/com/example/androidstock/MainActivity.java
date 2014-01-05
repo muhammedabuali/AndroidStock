@@ -2,6 +2,7 @@ package com.example.androidstock;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,15 +35,24 @@ public class MainActivity extends Activity {
 		webview.setWebViewClient(new WebViewClient() {
 			
 			@Override
-			public void onPageFinished(WebView view, String url) {
+			synchronized public void onPageFinished(WebView view, String url) {
 				Log.d("hello",url);
 			   //Load HTML
 				if(!flag){
+					flag = true;	
 					view.loadUrl("javascript:__doPostBack('ctl00$C$S$lkMarket','')");
+					try {
+						wait(15000);
+						view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				}else{
-					view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
+					Log.d("hello","here you go");
+					//view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
 				}
-			   flag = true;
 			   
 			}
 			
@@ -71,8 +81,13 @@ class MyJavaScriptInterface {
 	@JavascriptInterface
 	public void showHTML(String _html) {
 	    html = _html;
+	    System.out.println(html);
 	    Document doc = Jsoup.parse(html);
 	    Log.d("hello","ok");
-	    Log.d("hello",doc.getElementsByTag("tr").size()+"");
+	    Elements elements = doc.getElementsByTag("span");
+	    for(int i=35; i< elements.size(); i++)
+	    	Log.d("data",elements.get(i).text());
+	    Log.d("hello","");
+	    Log.d("hello","14");
 	}
 }
