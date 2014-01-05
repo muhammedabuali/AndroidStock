@@ -2,6 +2,7 @@ package com.example.androidstock;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.app.Activity;
@@ -21,7 +22,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		WebView webview = new WebView(this);
-		//webview.setVisibility(View.GONE);		
+		//webview.setVisibility(webview.GONE);		
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		
 		setContentView(webview);
@@ -84,10 +85,19 @@ class MyJavaScriptInterface {
 	    System.out.println(html);
 	    Document doc = Jsoup.parse(html);
 	    Log.d("hello","ok");
-	    Elements elements = doc.getElementsByTag("span");
-	    for(int i=35; i< elements.size(); i++)
-	    	Log.d("data",elements.get(i).text());
+	    Elements elements = doc.getElementsByTag("tr");
+	    for(int i=25; i< elements.size()-1; i++)
+	    	Log.d("data",elements.get(i).child(6).text());
 	    Log.d("hello","");
 	    Log.d("hello","14");
+	}
+	
+	public void get_data(Document d){
+		Elements elements = d.getElementsByTag("span");
+		for(int i=25; i< elements.size()-1; i++)
+	    	Log.d("data",elements.get(i).child(6).text());
+		for(int i=35; i< elements.size(); i++)
+	    	Log.d("data",elements.get(i).text());
+	    
 	}
 }
