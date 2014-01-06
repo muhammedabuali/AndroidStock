@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class StockActivity extends Activity {
 	
-	private int stock_id;
+	private long stock_id;
 	private CompaniesDataSource datasource;
 	private Company company;
 	private Button button;

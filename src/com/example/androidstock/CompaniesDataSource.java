@@ -77,7 +77,7 @@ public void deleteCompany(Company company) {
     return companies;
   }
   
-  public Company getCompany(int id){
+  public Company getCompany(long id){
 	  Cursor cursor = database.query(MySQLiteHelper.TABLE_COMPANIES,
 		        allColumns, MySQLiteHelper.COLUMN_ID + " = "+ id, null, null, null, null);
 	  return cursorToCompany(cursor);
