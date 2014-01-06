@@ -11,27 +11,33 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.view.Window;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	boolean flag = false;
-	
+	ArrayAdapter<String> arrayAdapter;
+	MyJavaScriptInterface jInterface;
+	Context con;
+	private CompaniesDataSource datasource;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
+		datasource = new CompaniesDataSource(this);
+	    datasource.open();
 		WebView webview = new WebView(this);
-		final WebView view2 = new WebView(this);
 		//webview.setVisibility(webview.GONE);		
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
 
 		webview.getSettings().setJavaScriptEnabled(true);
 		webview.getSettings().setBuiltInZoomControls(true); 
 		
-		MyJavaScriptInterface jInterface = new MyJavaScriptInterface(this);
+		jInterface = new MyJavaScriptInterface(this,datasource);
 		webview.addJavascriptInterface(jInterface, "HtmlViewer");
 		
 		webview.setWebViewClient(new WebViewClient() {
@@ -49,6 +55,10 @@ public class MainActivity extends Activity {
 					try {
 						wait(25000);
 						view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
+						/*do{
+							wait(500);
+						}while(!jInterface.status);*/
+						
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -78,9 +88,13 @@ public class MainActivity extends Activity {
 class MyJavaScriptInterface {
 	private Context ctx;
 	public String html;
-
-	MyJavaScriptInterface(Context ctx) {
+	public boolean status;
+	private CompaniesDataSource datasource;
+	
+	MyJavaScriptInterface(Context ctx, CompaniesDataSource datasource) {
 	    this.ctx = ctx;
+	    this.datasource = datasource;
+	    this.status = false;
 	}
 
 	@JavascriptInterface
@@ -112,6 +126,12 @@ class MyJavaScriptInterface {
 	    }
 	    Log.d("data","elements ="+names.size());
 	    Log.d("data","changes ="+changes.size());
+	    //delete elements from database and insert new ones
+	    datasource.deleteAllCompanies();
+	    for(int i =0; i< names.size(); i++){
+	    	datasource.createCompany(names.get(i), changes.get(i));
+	    }
+	    status = true;
 	    Log.d("hello","14");
 	}
 	
