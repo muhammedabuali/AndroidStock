@@ -23,7 +23,13 @@ public class Company {
 		this.change = change;
 	}
 	public void setCompany(String string, String string2) {
-		// TODO Auto-generated method stub
+		name = string;
+		change = string2;
 		
+	}
+	
+	@Override
+	public String toString(){
+		return name +" "+ change;
 	}
 }

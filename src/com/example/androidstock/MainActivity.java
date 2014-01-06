@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,7 +17,6 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	boolean flag = false;
@@ -131,7 +131,8 @@ class MyJavaScriptInterface {
 	    for(int i =0; i< names.size(); i++){
 	    	datasource.createCompany(names.get(i), changes.get(i));
 	    }
-	    status = true;
+	    Intent myIntent = new Intent(ctx, ListActivity.class);
+	    ctx.startActivity(myIntent); 
 	    Log.d("hello","14");
 	}
 	

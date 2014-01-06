@@ -52,8 +52,8 @@ public void deleteCompany(Company company) {
         + " = " + id, null);
   }
 
-  public List<Company> getAllComments() {
-    List<Company> companies = new ArrayList<Company>();
+  public ArrayList<Company> getAllCompanies() {
+    ArrayList<Company> companies = new ArrayList<Company>();
 
     Cursor cursor = database.query(MySQLiteHelper.TABLE_COMPANIES,
         allColumns, null, null, null, null, null);
