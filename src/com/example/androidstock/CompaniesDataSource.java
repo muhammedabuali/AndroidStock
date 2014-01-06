@@ -92,4 +92,19 @@ public void deleteCompany(Company company) {
 		
 		return start_id;
 	}
+
+	public ArrayList<Company> getFavouriteCompanies() {
+		Cursor cur = database.query(true, MySQLiteHelper.TABLE_COMPANIES, allColumns,
+				MySQLiteHelper.IS_FAVORITE + " = 1", null, null, null, null, null, null);
+		ArrayList<Company> companies = new ArrayList<Company>();
+		cur.moveToFirst();
+	    while (!cur.isAfterLast()) {
+	      Company company = cursorToCompany(cur);
+	      companies.add(company);
+	      cur.moveToNext();
+	    }
+	    // make sure to close the cursor
+	    cur.close();
+	    return companies;
+	}
 }

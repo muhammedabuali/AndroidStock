@@ -22,15 +22,19 @@
         <activity
             android:name="com.example.androidstock.ListActivity"
             android:label="@string/title_activity_list" >
+        </activity>
+        <activity
+            android:name="com.example.androidstock.StockActivity"
+            android:label="@string/title_activity_stock" >
+        </activity>
+        <activity
+            android:name="com.example.androidstock.FavouriteActivity"
+            android:label="@string/title_activity_favourite" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.example.androidstock.StockActivity"
-            android:label="@string/title_activity_stock" >
         </activity>
     </application>
 

@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_stock">StockActivity</string>
+    <string name="title_activity_favourite">FavouriteActivity</string>
 
 </resources>
