@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class StockActivity extends Activity {
 	
@@ -28,6 +29,18 @@ public class StockActivity extends Activity {
 		else{
 			button.setText("احذف من المفضلة");
 		}
+		populateView();
+	}
+	
+	public void populateView(){
+		TextView tv = (TextView)findViewById(R.id.company_value);
+		tv.setText(company.getName());
+		tv = (TextView)findViewById(R.id.amount_value);
+		tv.setText(company.getAmount());
+		tv = (TextView)findViewById(R.id.price_value);
+		tv.setText(company.getPrice());
+		tv = (TextView)findViewById(R.id.change_value);
+		tv.setText(company.getChange());
 	}
 
 	@Override
