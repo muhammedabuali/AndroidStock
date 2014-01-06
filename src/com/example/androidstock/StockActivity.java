@@ -1,7 +1,8 @@
 package com.example.androidstock;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ public class StockActivity extends Activity {
 		datasource = new CompaniesDataSource(this);
 		datasource.open();
 		stock_id  = ListActivity.current_id;
+		Log.d("hello",stock_id+"");
 		company = datasource.getCompany(stock_id);
 		button = (Button)findViewById(R.id.favorite_button);
 		if(company.getFavorite()){

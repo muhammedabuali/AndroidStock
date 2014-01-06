@@ -41,8 +41,8 @@ public class FavouriteActivity extends Activity {
 	        public void onItemClick(AdapterView<?> paramAdapterView, View paramView, int position,
 	                long paramLong) {
 	        	current_id = companies.get(position).getId();
-	        	Intent intent = new Intent(FavouriteActivity.this, StockActivity.class);     
-	            startActivity(intent);
+	        	/*Intent intent = new Intent(FavouriteActivity.this, StockActivity.class);     
+	            startActivity(intent);*/
 	        }
 	    });
 	}

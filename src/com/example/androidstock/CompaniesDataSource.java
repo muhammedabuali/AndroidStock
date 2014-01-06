@@ -1,13 +1,13 @@
 package com.example.androidstock;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class CompaniesDataSource {
   
@@ -78,6 +78,7 @@ public void deleteCompany(Company company) {
   }
   
   public Company getCompany(long id){
+	  Log.d("hello", "id d = "+ id);
 	  Cursor cursor = database.query(MySQLiteHelper.TABLE_COMPANIES,
 		        allColumns, MySQLiteHelper.COLUMN_ID + " = "+ id, null, null, null, null);
 	  return cursorToCompany(cursor);

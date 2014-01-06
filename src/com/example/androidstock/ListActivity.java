@@ -40,8 +40,10 @@ public class ListActivity extends Activity {
 	        public void onItemClick(AdapterView<?> paramAdapterView, View paramView, int position,
 	                long paramLong) {
 	        	current_id = start_id + position;
-	        	Intent intent = new Intent(ListActivity.this, StockActivity.class);     
-	            startActivity(intent);
+	        	Log.d("hello","id ="+current_id);
+	        	/*Intent intent = new Intent(ListActivity.this, StockActivity.class);     
+	            
+	        	startActivity(intent);*/
 	        }
 	    });
 	}
