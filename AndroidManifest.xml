@@ -18,14 +18,19 @@
         <activity
             android:name="com.example.androidstock.MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.example.androidstock.ListActivity"
             android:label="@string/title_activity_list" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.androidstock.StockActivity"
+            android:label="@string/title_activity_stock" >
         </activity>
     </application>
 
