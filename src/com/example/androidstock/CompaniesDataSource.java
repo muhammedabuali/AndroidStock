@@ -81,7 +81,7 @@ public void deleteCompany(Company company) {
 	  return cursorToCompany(cursor);
   }
   
-  public void setCompanyIsFavorite(int id , boolean is_favorite){
+  public void setCompanyIsFavorite(long id , boolean is_favorite){
 	  int x;
 	  if(is_favorite){
 		  x = 1;

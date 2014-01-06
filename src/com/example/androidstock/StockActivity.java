@@ -11,6 +11,7 @@ public class StockActivity extends Activity {
 	private int stock_id;
 	private CompaniesDataSource datasource;
 	private Company company;
+	private Button button;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +21,12 @@ public class StockActivity extends Activity {
 		datasource.open();
 		stock_id  = ListActivity.current_id;
 		company = datasource.getCompany(stock_id);
-		Button button = (Button)findViewById(R.id.favorite_button);
+		button = (Button)findViewById(R.id.favorite_button);
 		if(company.getFavorite()){
 			button.setText("اضف الي المفضلة");
 		}
 		else{
-			button.setText("حذف من المفضلة");
+			button.setText("احذف من المفضلة");
 		}
 	}
 
@@ -37,7 +38,14 @@ public class StockActivity extends Activity {
 	}
 	
 	public void isFavorite(View v){
-		
+		if(company.getFavorite()){
+			datasource.setCompanyIsFavorite(company.getId(), false);
+			button.setText("اضف الي المفضلة");
+		}
+		else{
+			datasource.setCompanyIsFavorite(company.getId(), true);
+			button.setText("احذف من المفضلة");
+		}
 	}
 
 }
