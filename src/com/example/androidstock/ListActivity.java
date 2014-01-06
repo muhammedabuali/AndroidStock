@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -47,8 +48,38 @@ public class ListActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.list, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.list:
+	            change(1);
+	            return true;
+	        case R.id.update:
+	            change(2);
+	            return true;
+	        case R.id.favourite:
+	            change(3);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+
+	private void change(int i) {
+		if(i == 2){
+			Intent intent = new Intent(ListActivity.this,MainActivity.class);
+			startActivity(intent);
+		}
+		if(i == 3){
+			Intent intent = new Intent(ListActivity.this,FavouriteActivity.class);
+			startActivity(intent);
+		}
+	}
+
 
 }
