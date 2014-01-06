@@ -45,7 +45,7 @@ public class Company {
 	
 	@Override
 	public String toString(){
-		return name +" "+ change;
+		return name +" "+ change ;
 	}
 	public int getPrice() {
 		return price;
