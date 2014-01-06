@@ -1,5 +1,7 @@
 package com.example.androidstock;
 
+import java.util.ArrayList;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -45,7 +47,7 @@ public class MainActivity extends Activity {
 					//setContentView(view2);
 					view.setVisibility(view.GONE);
 					try {
-						wait(15000);
+						wait(25000);
 						view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -87,19 +89,39 @@ class MyJavaScriptInterface {
 	    System.out.println(html);
 	    Document doc = Jsoup.parse(html);
 	    Log.d("hello","ok");
-	    Elements elements = doc.getElementsByTag("tr");
-	    for(int i=25; i< elements.size()-1; i++)
-	    	Log.d("data",elements.get(i).child(6).text());
-	    Log.d("hello","");
+	    Elements elements = doc.getElementsByTag("span");
+	    ArrayList<String> names = new ArrayList<String>();
+	    for(int i=35; i< elements.size(); i++)
+	    	names.add(elements.get(i).text());
+	    elements = doc.getElementsByTag("tr");
+	    ArrayList<String> changes = new ArrayList<String>();
+	    for(int i=25; i< elements.size(); i++){
+	    	if(elements.get(i).children().size()>7)
+	    	changes.add(elements.get(i).child(6).text());
+	    }
+	    if(changes.size()>names.size()){
+	    	int x = changes.size()- names.size();
+	    	for(int i=0; i<x;i++){
+	    		changes.remove(changes.size()-1);
+	    	}
+	    }else if (changes.size()<names.size()){
+	    	int x = elements.size()- changes.size();
+	    	for(int i=0; i<x;i++){
+	    		names.remove(elements.size()-1);
+	    	}
+	    }
+	    Log.d("data","elements ="+names.size());
+	    Log.d("data","changes ="+changes.size());
 	    Log.d("hello","14");
 	}
 	
 	public void get_data(Document d){
 		Elements elements = d.getElementsByTag("span");
-		for(int i=25; i< elements.size()-1; i++)
-	    	Log.d("data",elements.get(i).child(6).text());
+		for(int i=25; i< elements.size()-1; i++){
+			if(elements.get(i).children().size()>7)
+				Log.d("data",elements.get(i).child(6).text());	
+		}
 		for(int i=35; i< elements.size(); i++)
-	    	Log.d("data",elements.get(i).text());
-	    
+			Log.d("data",elements.get(i).text());
 	}
 }
