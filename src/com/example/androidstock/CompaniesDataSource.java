@@ -19,6 +19,7 @@ public class CompaniesDataSource {
       MySQLiteHelper.COLUMN_CHANGE,
       MySQLiteHelper.COLUMN_PRICE,
       MySQLiteHelper.COLUMN_AMOUNT};
+private long start_id;
 
   public CompaniesDataSource(Context context) {
     dbHelper = new MySQLiteHelper(context);
@@ -63,6 +64,7 @@ public void deleteCompany(Company company) {
         allColumns, null, null, null, null, null);
 
     cursor.moveToFirst();
+    start_id = cursor.getLong(0);
     while (!cursor.isAfterLast()) {
       Company company = cursorToCompany(cursor);
       companies.add(company);
@@ -84,4 +86,9 @@ public void deleteCompany(Company company) {
     		cursor.getInt(3), cursor.getInt(4));
     return company;
   }
+
+public long getId() {
+	
+	return start_id;
+}
 }
