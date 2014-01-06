@@ -18,7 +18,8 @@ public class CompaniesDataSource {
       MySQLiteHelper.COLUMN_COMPANY,
       MySQLiteHelper.COLUMN_CHANGE,
       MySQLiteHelper.COLUMN_PRICE,
-      MySQLiteHelper.COLUMN_AMOUNT};
+      MySQLiteHelper.COLUMN_AMOUNT,
+      MySQLiteHelper.IS_FAVORITE};
 
   public CompaniesDataSource(Context context) {
     dbHelper = new MySQLiteHelper(context);
@@ -38,6 +39,7 @@ public class CompaniesDataSource {
     values.put(MySQLiteHelper.COLUMN_CHANGE, change);
     values.put(MySQLiteHelper.COLUMN_PRICE, string);
     values.put(MySQLiteHelper.COLUMN_AMOUNT, string2);
+    values.put(MySQLiteHelper.IS_FAVORITE, "0");
     long insertId = database.insert(MySQLiteHelper.TABLE_COMPANIES, null,
         values);
     Cursor cursor = database.query(MySQLiteHelper.TABLE_COMPANIES,
@@ -81,7 +83,8 @@ public void deleteCompany(Company company) {
     Company company = new Company();
     company.setId(cursor.getLong(0));
     company.setCompany(cursor.getString(1),cursor.getString(2),
-    		cursor.getInt(3), cursor.getInt(4));
+    		cursor.getInt(3), cursor.getInt(4), cursor.getInt(4));
     return company;
   }
+  
 }

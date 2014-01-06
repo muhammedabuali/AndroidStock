@@ -6,6 +6,7 @@ public class Company {
 	  private String change;
 	  private int price;
 	  private int amount;
+	  private boolean is_favorite;
 	  
 	public long getId() {
 		return id;
@@ -25,11 +26,21 @@ public class Company {
 	public void setChange(String change) {
 		this.change = change;
 	}
-	public void setCompany(String string, String string2, int i, int j) {
+	public void setCompany(String string, String string2, int i, int j, int k) {
 		name = string;
 		change = string2;
 		setPrice(i);
 		setAmount(j);
+		setFavorite(k);
+	}
+	
+	public void setFavorite(int k){
+		if(k == 0){
+			this.is_favorite = false;
+		}
+		else{
+			this.is_favorite = true;
+		}
 	}
 	
 	@Override
