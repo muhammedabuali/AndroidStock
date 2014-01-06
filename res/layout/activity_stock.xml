@@ -16,18 +16,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="29dp"
         android:layout_marginTop="22dp"
-        android:text="Medium Text"
+        android:text="الشركة:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/company_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/company"
-        android:layout_alignBottom="@+id/company"
-        android:layout_marginRight="51dp"
-        android:layout_toLeftOf="@+id/company"
-        android:text="TextView" />
 
     <TextView
         android:id="@+id/change_value"
@@ -47,32 +37,12 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/company"
-        android:layout_below="@+id/company"
-        android:layout_marginTop="40dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/change"
-        android:layout_below="@+id/change"
-        android:layout_marginTop="38dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/price"
         android:layout_centerVertical="true"
-        android:text="Medium Text"
+        android:text="الكمية:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -89,9 +59,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="76dp"
-        android:layout_toRightOf="@+id/amount_value"
-        android:text="favorite"
-       	android:onClick="setFavorite" />
+        android:layout_alignRight="@+id/company"
+        android:layout_marginBottom="42dp"
+        android:onClick="setFavorite"
+        android:text="favorite" />
+
+    <TextView
+        android:id="@+id/company_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/company"
+        android:layout_toLeftOf="@+id/favorite_button"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/amount"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="18dp"
+        android:text="القيمة بالجنية:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/price"
+        android:layout_below="@+id/company"
+        android:layout_marginTop="19dp"
+        android:text="معدل التغيير:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
