@@ -34,6 +34,11 @@ public class Company {
 		setFavorite(k);
 	}
 	
+	public boolean getFavorite(){
+		return is_favorite;
+	}
+	
+	
 	public void setFavorite(int k){
 		if(k == 0){
 			this.is_favorite = false;

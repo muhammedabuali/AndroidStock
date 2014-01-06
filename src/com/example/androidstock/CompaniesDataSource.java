@@ -74,6 +74,26 @@ public void deleteCompany(Company company) {
     cursor.close();
     return companies;
   }
+  
+  public Company getCompany(int id){
+	  Cursor cursor = database.query(MySQLiteHelper.TABLE_COMPANIES,
+		        allColumns, MySQLiteHelper.COLUMN_ID + " = "+ id, null, null, null, null);
+	  return cursorToCompany(cursor);
+  }
+  
+  public void setCompanyIsFavorite(int id , boolean is_favorite){
+	  int x;
+	  if(is_favorite){
+		  x = 1;
+	  }
+	  else{
+		  x= 0;
+	  }
+	  String sql = "UPDATE "+ MySQLiteHelper.TABLE_COMPANIES +" SET " + 
+			  MySQLiteHelper.IS_FAVORITE + " = '"+x
+			  +"' WHERE "+ MySQLiteHelper.COLUMN_ID + " = "+id;
+	  database.execSQL(sql);
+  }
 
   public void deleteAllCompanies(){
 	database.delete(MySQLiteHelper.TABLE_COMPANIES, null, null);  
