@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
 					//setContentView(view2);
 					view.setVisibility(view.GONE);
 					try {
-						wait(25000);
+						wait(30000);
 						view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
 						/*do{
 							wait(500);
@@ -113,10 +113,22 @@ class MyJavaScriptInterface {
 	    	if(elements.get(i).children().size()>7)
 	    	changes.add(elements.get(i).child(6).text());
 	    }
+	    ArrayList<String> prices = new ArrayList<String>();
+	    for(int i=25; i< elements.size(); i++){
+	    	if(elements.get(i).children().size()>7)
+	    	prices.add(elements.get(i).child(10).text());
+	    }
+	    ArrayList<String> amounts = new ArrayList<String>();
+	    for(int i=25; i< elements.size(); i++){
+	    	if(elements.get(i).children().size()>7)
+	    	amounts.add(elements.get(i).child(11).text());
+	    }
 	    if(changes.size()>names.size()){
 	    	int x = changes.size()- names.size();
 	    	for(int i=0; i<x;i++){
 	    		changes.remove(changes.size()-1);
+	    		amounts.remove(changes.size()-1);
+	    		prices.remove(changes.size()-1);
 	    	}
 	    }else if (changes.size()<names.size()){
 	    	int x = elements.size()- changes.size();
@@ -126,10 +138,13 @@ class MyJavaScriptInterface {
 	    }
 	    Log.d("data","elements ="+names.size());
 	    Log.d("data","changes ="+changes.size());
+	    Log.d("data","prices ="+prices.size());
+	    Log.d("data","amounts ="+amounts.size());
 	    //delete elements from database and insert new ones
 	    datasource.deleteAllCompanies();
 	    for(int i =0; i< names.size(); i++){
-	    	datasource.createCompany(names.get(i), changes.get(i));
+	    	datasource.createCompany(names.get(i), changes.get(i),
+	    			prices.get(i), amounts.get(i));
 	    }
 	    Intent myIntent = new Intent(ctx, ListActivity.class);
 	    ctx.startActivity(myIntent); 

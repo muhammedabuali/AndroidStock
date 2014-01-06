@@ -23,7 +23,8 @@ public class ListActivity extends Activity {
 	    Log.d("hello",companies.size()+"");
 	    if(companies.size()>0){
 	    final ArrayAdapter<Company> adapter = new ArrayAdapter<Company>(this,
-	            android.R.layout.simple_list_item_1, companies);
+	    		R.layout.aligned_right, companies);
+	    
 	    Log.d("data",adapter.toString());
 	        listview.setAdapter(adapter);
 	    }

@@ -16,7 +16,9 @@ public class CompaniesDataSource {
   private MySQLiteHelper dbHelper;
   private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
       MySQLiteHelper.COLUMN_COMPANY,
-      MySQLiteHelper.COLUMN_CHANGE};
+      MySQLiteHelper.COLUMN_CHANGE,
+      MySQLiteHelper.COLUMN_PRICE,
+      MySQLiteHelper.COLUMN_AMOUNT};
 
   public CompaniesDataSource(Context context) {
     dbHelper = new MySQLiteHelper(context);
@@ -30,10 +32,12 @@ public class CompaniesDataSource {
     dbHelper.close();
   }
 
-  public Company createCompany(String name, String change) {
+  public Company createCompany(String name, String change, String string, String string2) {
     ContentValues values = new ContentValues();
     values.put(MySQLiteHelper.COLUMN_COMPANY, name);
     values.put(MySQLiteHelper.COLUMN_CHANGE, change);
+    values.put(MySQLiteHelper.COLUMN_PRICE, string);
+    values.put(MySQLiteHelper.COLUMN_AMOUNT, string2);
     long insertId = database.insert(MySQLiteHelper.TABLE_COMPANIES, null,
         values);
     Cursor cursor = database.query(MySQLiteHelper.TABLE_COMPANIES,
@@ -60,8 +64,8 @@ public void deleteCompany(Company company) {
 
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
-      Company comment = cursorToCompany(cursor);
-      companies.add(comment);
+      Company company = cursorToCompany(cursor);
+      companies.add(company);
       cursor.moveToNext();
     }
     // make sure to close the cursor
@@ -76,7 +80,8 @@ public void deleteCompany(Company company) {
   private Company cursorToCompany(Cursor cursor) {
     Company company = new Company();
     company.setId(cursor.getLong(0));
-    company.setCompany(cursor.getString(1),cursor.getString(2));
+    company.setCompany(cursor.getString(1),cursor.getString(2),
+    		cursor.getInt(3), cursor.getInt(4));
     return company;
   }
 }
