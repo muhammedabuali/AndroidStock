@@ -22,11 +22,11 @@ public class MainActivity extends Activity {
 	boolean flag = false;
 	ArrayAdapter<String> arrayAdapter;
 	MyJavaScriptInterface jInterface;
-	Context con;
+	public static Context con;
 	private CompaniesDataSource datasource;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+		con = this;
 		super.onCreate(savedInstanceState);
 		datasource = new CompaniesDataSource(this);
 	    datasource.open();

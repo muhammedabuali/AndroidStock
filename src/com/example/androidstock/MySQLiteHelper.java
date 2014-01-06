@@ -25,8 +25,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
       + COLUMN_COMPANY+ " text not null,"
       + COLUMN_CHANGE+ " text not null,"
       + COLUMN_PRICE+ " integer not null,"
-     + COLUMN_AMOUNT + " integer not null),"
-  	+ IS_FAVORITE + "INTEGER not null";
+     + COLUMN_AMOUNT + " integer not null,"
+  	+ IS_FAVORITE + " INTEGER not null);";
   public MySQLiteHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
   }
