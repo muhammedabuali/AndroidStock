@@ -2,7 +2,6 @@ package com.example.androidstock;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.app.Activity;
@@ -10,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -22,10 +22,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		WebView webview = new WebView(this);
+		final WebView view2 = new WebView(this);
 		//webview.setVisibility(webview.GONE);		
 		getWindow().requestFeature(Window.FEATURE_PROGRESS);
-		
-		setContentView(webview);
 
 		webview.getSettings().setJavaScriptEnabled(true);
 		webview.getSettings().setBuiltInZoomControls(true); 
@@ -40,8 +39,11 @@ public class MainActivity extends Activity {
 				Log.d("hello",url);
 			   //Load HTML
 				if(!flag){
-					flag = true;	
+					flag = true;
+					setContentView(view);
 					view.loadUrl("javascript:__doPostBack('ctl00$C$S$lkMarket','')");
+					//setContentView(view2);
+					view.setVisibility(view.GONE);
 					try {
 						wait(15000);
 						view.loadUrl("javascript:window.HtmlViewer.showHTML	(document.getElementsByTagName('html')[0].innerHTML);");
